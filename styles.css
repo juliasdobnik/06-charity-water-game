@@ -1,0 +1,223 @@
+/* Charity: water Brand Colors
+
+Primary Colors:
+- Yellow:     #FFC907
+- Blue:       #2E9DF7
+
+Secondary Colors:
+- Light Blue: #8BD1CB
+- Green:      #4FCB53
+- Orange:     #FF902A
+- Red:        #F5402C
+- Dark Green: #159A48
+- Pink:       #F16061
+
+*/
+
+body {
+    background: #FFF8E7; /* Cream beige */
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+h1 {
+    color: #2E9DF7; /* Charity: Water Blue */
+    text-align: center;
+    margin-top: 30px;
+    font-size: 3em;
+    text-shadow: -8px 8px 0 #FFC907; /* 45-degree angle from bottom left */
+    font-weight: bold;
+    -webkit-text-stroke: 2px #14213D; /* Navy blue outline for Webkit browsers */
+    text-stroke: 2px #14213D; /* Standard property for future support */
+}
+
+.instructions {
+    text-align: center;
+    color: #222;
+    font-size: 1.3em;
+    margin-top: 0;
+    margin-bottom: 18px;
+    font-weight: normal;
+}
+
+#scenario {
+    background: #FFC907; /* Charity: Water Yellow */
+    color: #222;
+    border-radius: 8px;
+    padding: 16px;
+    width: 60%;
+    margin: 20px auto 0 auto;
+    font-size: 1.1em;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+}
+
+#points-available {
+    background: #fff;
+    color: #293f58; /* Navy blue */
+    padding: 10px 18px;
+    border-radius: 20px;
+    font-size: 1.1em;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    border: 2px solid #14213D;
+}
+
+.points-available {
+    background: #fff;
+    color: #293f58; /* Navy blue */
+    padding: 10px 18px;
+    border-radius: 20px;
+    font-size: 1.1em;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    border: 2px solid #14213D;
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    font-weight: bold;
+    max-width: 260px;
+    width: auto;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+
+#sliders-section {
+    margin-top: 50px;
+}
+
+.slider-container {
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(46,157,247,0.08);
+    padding: 20px 18px 18px 18px;
+    text-align: center;
+    min-width: 140px;
+}
+
+label {
+    color: #152d9a; /* Charity: Water Dark Green */
+    font-weight: bold;
+    font-size: 1.1em;
+}
+
+input[type="range"] {
+    width: 100%;
+    margin: 12px 0 8px 0;
+    accent-color: #FFC907; /* Charity: Water Yellow */
+    height: 4px;
+}
+
+span[id$="-value"] {
+    color: #293f58; /* Charity: Water Red */
+    font-weight: bold;
+    font-size: 1.2em;
+}
+
+#submit-btn {
+    background: #2E9DF7;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 14px 32px;
+    font-size: 1.2em;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.2s, opacity 0.2s;
+    box-shadow: 0 2px 8px rgba(46,157,247,0.08);
+    margin-top: 10px;
+}
+#submit-btn:hover:enabled {
+    background: #FFC907;
+    color: #14213D;
+}
+#submit-btn:disabled {
+    background: #8BD1CB;
+    color: #fff;
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+#charitywater-logo {
+    position: fixed;
+    top: 16px;
+    left: 16px;
+    z-index: 200;
+    display: block;
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+}
+#charitywater-logo img {
+    height: 54px;
+    width: auto;
+    display: block;
+}
+
+#fireworks-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none;
+    z-index: 300;
+}
+.firework {
+    position: absolute;
+    border-radius: 50%;
+    opacity: 0.8;
+    pointer-events: none;
+    will-change: transform, opacity;
+}
+
+@media (max-width: 700px) {
+    body {
+        margin-left: 12px;
+        margin-right: 12px;
+    }
+    .points-available {
+        position: static;
+        display: block;
+        margin: 12px auto 0 auto;
+        text-align: center;
+    }
+    #sliders-section {
+        flex-direction: column;
+        gap: 18px;
+        align-items: center;
+    }
+    #scenario {
+        width: 90%;
+    }
+    #charitywater-logo {
+        top: 8px;
+        left: 8px;
+    }
+    #charitywater-logo img {
+        height: 40px;
+    }
+}
+
+@media (max-width: 1024px) {
+    .points-available {
+        position: static;
+        display: block;
+        margin: 12px auto 0 auto;
+        text-align: center;
+        max-width: 260px;
+        width: auto;
+    }
+    #sliders-section {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 1fr 1fr;
+        gap: 18px;
+        justify-items: center;
+        align-items: center;
+        margin-top: 40px;
+    }
+    #scenario {
+        width: 90%;
+    }
+}

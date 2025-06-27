@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Charity Water Game</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="fireworks-container" style="pointer-events: none;"></div>
+    <h1>Distirbute the Water!</h1>
+    <h2 class="instructions">Allocate points to different project elements for providing water to the village.</h2>
+    <!-- Scenario Section -->
+    <div id="scenario" style="margin-bottom: 20px;"></div>
+    <!-- Points Available Display -->
+    <div id="points-available" class="points-available">
+        Points Available: <span id="points-value">100</span>
+    </div>
+    <!-- Sliders Section -->
+    <div id="sliders-section" style="display: flex; gap: 30px; justify-content: center; margin-top: 40px;">
+        <div class="slider-container">
+            <label for="drilling-slider">Drilling</label><br>
+            <input type="range" id="drilling-slider" min="0" max="50" value="0">
+            <span id="drilling-value">0</span>
+        </div>
+        <div class="slider-container">
+            <label for="transport-slider">Transport</label><br>
+            <input type="range" id="transport-slider" min="0" max="50" value="0">
+            <span id="transport-value">0</span>
+        </div>
+        <div class="slider-container">
+            <label for="filters-slider">Filters</label><br>
+            <input type="range" id="filters-slider" min="0" max="50" value="0">
+            <span id="filters-value">0</span>
+        </div>
+        <div class="slider-container">
+            <label for="education-slider">Education</label><br>
+            <input type="range" id="education-slider" min="0" max="50" value="0">
+            <span id="education-value">0</span>
+        </div>
+    </div>
+    <div style="text-align: center; margin-top: 30px;">
+        <button id="submit-btn" disabled>Submit Plan</button>
+    </div>
+    <div id="result-overlay" style="display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(20,33,61,0.85); z-index: 100; justify-content: center; align-items: center; flex-direction: column;">
+        <div style="background: #fff; border-radius: 16px; padding: 36px 28px; text-align: center; min-width: 300px; box-shadow: 0 4px 24px rgba(0,0,0,0.18);">
+            <h2 id="result-message" style="color: #2E9DF7; margin-bottom: 24px;"></h2>
+            <button id="replay-btn" style="margin: 8px 12px 0 0;">Replay Level</button>
+            <button id="next-btn" style="margin: 8px 0 0 12px;">Go to Next Level</button>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
