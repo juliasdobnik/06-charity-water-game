@@ -20,6 +20,35 @@
     9. Island village where hurricanes ruin stored rainwater supplies
     10. Arctic hamlet losing traditional water sources due to melting permafrost
     -->
+
+    <!-- Start Menu Overlay -->
+    <div id="start-menu" style="position:fixed; top:0; left:0; width:100vw; height:100vh; background:#FFF8E7; z-index:500; display:flex; flex-direction:column; align-items:center; justify-content:flex-start;">
+        <h1 id="menu-title"
+            style="
+            font-size:5em;
+            color:#2E9DF7;
+            margin-top:180px; /* Lower the title even more */
+            margin-bottom: 40px;
+            text-shadow: -8px 8px 0 #FFC907;
+            font-weight: bold;
+            transform: rotate(-8deg);
+            ">
+            Distirbute the Water!
+        </h1>
+        <div style="display: flex; flex-direction: column; align-items: center; margin-top: 120px;">
+            <button id="start-btn" class="themed-btn" style="font-size:2em; width:220px; margin-bottom: 32px;">Start</button>
+            <button id="tutorial-btn" class="themed-btn" style="font-size:2em; width:220px;">Tutorial</button>
+        </div>
+    </div>
+
+    <!-- Tutorial Overlay -->
+    <div id="tutorial-overlay" style="display:none; position:fixed; top:0; left:0; width:100vw; height:100vh; background:rgba(255,248,231,0.98); z-index:600; flex-direction:column; align-items:center; justify-content:center;">
+        <div id="tutorial-box" style="max-width: 480px; margin: 80px auto 0 auto; background: #fff; border-radius: 18px; box-shadow: 0 4px 24px rgba(0,0,0,0.10); padding: 36px 32px; text-align: center; font-size: 1.3em; color: #222;">
+            <!-- Tutorial text will go here -->
+        </div>
+        <div style="text-align:center; margin-top: 18px; color:#2E9DF7; font-size:1.1em;">Click anywhere to continue</div>
+    </div>
+
     <div id="fireworks-container" style="pointer-events: none;"></div>
     <h1>Distirbute the Water!</h1>
     <h2 class="instructions">Allocate points to different project elements for providing water to the village.</h2>

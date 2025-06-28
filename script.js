@@ -267,3 +267,91 @@ nextBtn.addEventListener('click', function() {
         resultOverlay.style.display = "none";
     }
 });
+
+// Wait until the DOM is fully loaded before running menu logic
+document.addEventListener('DOMContentLoaded', function() {
+    // Hide the game UI at first (for the start menu)
+    document.querySelector('h1:not(#menu-title)').style.display = 'none';
+    document.querySelector('.instructions').style.display = 'none';
+    document.getElementById('level-indicator').style.display = 'none';
+    document.getElementById('scenario').style.display = 'none';
+    document.getElementById('points-available').style.display = 'none';
+    document.getElementById('sliders-section').style.display = 'none';
+    document.getElementById('submit-btn').style.display = 'none';
+
+    // Make sure the tutorial overlay is hidden at the start
+    document.getElementById('tutorial-overlay').style.display = 'none';
+
+    // Function to show the game UI
+    function showGameUI() {
+        document.querySelector('h1:not(#menu-title)').style.display = '';
+        document.querySelector('.instructions').style.display = '';
+        document.getElementById('level-indicator').style.display = '';
+        document.getElementById('scenario').style.display = '';
+        document.getElementById('points-available').style.display = '';
+        document.getElementById('sliders-section').style.display = '';
+        document.getElementById('submit-btn').style.display = '';
+    }
+
+    // Hide both menu and menu h1 when starting or tutorial
+    function hideMenu() {
+        document.getElementById('start-menu').style.display = 'none';
+        document.getElementById('menu-title').style.display = 'none';
+    }
+
+    // Start button: hide menu, show game
+    document.getElementById('start-btn').addEventListener('click', function() {
+        hideMenu();
+        showGameUI();
+    });
+
+    // Tutorial logic
+    const tutorialSteps = [
+        "Welcome to the Charity Water Game!<br><br>You'll learn how to help a village get clean water.",
+        "At the top, you'll see instructions for each round.",
+        "Below, you'll see a yellow box. This is the <b>scenario</b> describing the village's water problem for this level.",
+        "You have <b>100 points</b> to distribute using the sliders.",
+        "<b>Drilling</b>: Finding and accessing water underground.",
+        "<b>Construction</b>: Building related infrastructure (wells, tanks, pipes, latrines).",
+        "<b>Transport</b>: Moving water or materials across terrain.",
+        "<b>Filters</b>: Making water safe to drink.",
+        "<b>Education</b>: Teaching hygiene, maintenance, and conservation.",
+        "Try to use all your points wisely! When you're ready, click Start to play."
+    ];
+    let tutorialIndex = 0;
+
+    document.getElementById('tutorial-btn').addEventListener('click', function() {
+        hideMenu();
+        document.getElementById('tutorial-overlay').style.display = 'flex';
+        tutorialIndex = 0;
+        document.getElementById('tutorial-box').innerHTML = tutorialSteps[tutorialIndex];
+    });
+
+    document.getElementById('tutorial-overlay').addEventListener('click', function() {
+        tutorialIndex++;
+        if (tutorialIndex < tutorialSteps.length) {
+            document.getElementById('tutorial-box').innerHTML = tutorialSteps[tutorialIndex];
+        } else {
+            document.getElementById('tutorial-overlay').style.display = 'none';
+            // Show the start menu again after tutorial finishes
+            document.getElementById('start-menu').style.display = 'flex';
+            document.getElementById('menu-title').style.display = '';
+            // Hide the game UI again
+            document.querySelector('h1:not(#menu-title)').style.display = 'none';
+            document.querySelector('.instructions').style.display = 'none';
+            document.getElementById('level-indicator').style.display = 'none';
+            document.getElementById('scenario').style.display = 'none';
+            document.getElementById('points-available').style.display = 'none';
+            document.getElementById('sliders-section').style.display = 'none';
+            document.getElementById('submit-btn').style.display = 'none';
+        }
+    });
+});
+
+// Show tutorial overlay or section when the page loads
+document.getElementById('tutorial-overlay').style.display = 'flex';
+
+// Close tutorial button
+document.getElementById('close-tutorial').addEventListener('click', function() {
+    document.getElementById('tutorial-overlay').style.display = 'none';
+});

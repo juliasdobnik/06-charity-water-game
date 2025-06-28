@@ -24,7 +24,7 @@ body {
 h1 {
     color: #2E9DF7; /* Charity: Water Blue */
     text-align: center;
-    margin-top: 30px;
+    margin-top: 80px;/* Lower the main heading a little bit */
     font-size: 3em;
     text-shadow: -8px 8px 0 #FFC907; /* 45-degree angle from bottom left */
     font-weight: bold;
@@ -50,6 +50,7 @@ h1 {
     margin: 20px auto 0 auto;
     font-size: 1.1em;
     box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    text-align: center; /* Center the scenario text */
 }
 
 #points-available {
@@ -83,6 +84,18 @@ h1 {
 
 #sliders-section {
     margin-top: 50px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    justify-content: center;
+    align-items: center;
+}
+
+#sliders-section > div {
+    display: flex;
+    gap: 30px;
+    justify-content: center; /* Center the sliders horizontally */
+    align-items: center;
 }
 
 .slider-container {
