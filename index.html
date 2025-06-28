@@ -32,26 +32,35 @@
         Points Available: <span id="points-value">100</span>
     </div>
     <!-- Sliders Section -->
-    <div id="sliders-section" style="display: flex; gap: 30px; justify-content: center; margin-top: 40px;">
-        <div class="slider-container">
-            <label for="drilling-slider">Drilling</label><br>
-            <input type="range" id="drilling-slider" min="0" max="50" value="0">
-            <span id="drilling-value">0</span>
+    <div id="sliders-section" style="display: flex; flex-direction: column; gap: 24px; justify-content: center; align-items: center; margin-top: 40px;">
+        <div style="display: flex; gap: 30px;">
+            <div class="slider-container">
+                <label for="drilling-slider">Drilling</label><br>
+                <input type="range" id="drilling-slider" min="0" max="50" value="0">
+                <span id="drilling-value">0</span>
+            </div>
+            <div class="slider-container">
+                <label for="construction-slider">Construction</label><br>
+                <input type="range" id="construction-slider" min="0" max="50" value="0">
+                <span id="construction-value">0</span>
+            </div>
+            <div class="slider-container">
+                <label for="transport-slider">Transport</label><br>
+                <input type="range" id="transport-slider" min="0" max="50" value="0">
+                <span id="transport-value">0</span>
+            </div>
         </div>
-        <div class="slider-container">
-            <label for="transport-slider">Transport</label><br>
-            <input type="range" id="transport-slider" min="0" max="50" value="0">
-            <span id="transport-value">0</span>
-        </div>
-        <div class="slider-container">
-            <label for="filters-slider">Filters</label><br>
-            <input type="range" id="filters-slider" min="0" max="50" value="0">
-            <span id="filters-value">0</span>
-        </div>
-        <div class="slider-container">
-            <label for="education-slider">Education</label><br>
-            <input type="range" id="education-slider" min="0" max="50" value="0">
-            <span id="education-value">0</span>
+        <div style="display: flex; gap: 30px; margin-top: 18px;">
+            <div class="slider-container">
+                <label for="filters-slider">Filters</label><br>
+                <input type="range" id="filters-slider" min="0" max="50" value="0">
+                <span id="filters-value">0</span>
+            </div>
+            <div class="slider-container">
+                <label for="education-slider">Education</label><br>
+                <input type="range" id="education-slider" min="0" max="50" value="0">
+                <span id="education-value">0</span>
+            </div>
         </div>
     </div>
     <div style="text-align: center; margin-top: 30px;">

@@ -3,11 +3,13 @@ console.log('JavaScript file is linked correctly.');
 
 // Get references to all sliders and value displays
 const drillingSlider = document.getElementById('drilling-slider');
+const constructionSlider = document.getElementById('construction-slider'); // new
 const transportSlider = document.getElementById('transport-slider');
 const filtersSlider = document.getElementById('filters-slider');
 const educationSlider = document.getElementById('education-slider');
 
 const drillingValue = document.getElementById('drilling-value');
+const constructionValue = document.getElementById('construction-value'); // new
 const transportValue = document.getElementById('transport-value');
 const filtersValue = document.getElementById('filters-value');
 const educationValue = document.getElementById('education-value');
@@ -30,12 +32,13 @@ const MAX_POINTS = 100;
 function updatePoints(changedSlider) {
     // Get the current values of all sliders
     let drilling = parseInt(drillingSlider.value);
+    let construction = parseInt(constructionSlider.value); // new
     let transport = parseInt(transportSlider.value);
     let filters = parseInt(filtersSlider.value);
     let education = parseInt(educationSlider.value);
 
     // Calculate the total points used
-    let totalUsed = drilling + transport + filters + education;
+    let totalUsed = drilling + construction + transport + filters + education;
 
     // If the total is more than allowed, adjust the changed slider
     if (totalUsed > MAX_POINTS) {
@@ -45,14 +48,16 @@ function updatePoints(changedSlider) {
         changedSlider.value = parseInt(changedSlider.value) - over;
         // Update the value after adjustment
         drilling = parseInt(drillingSlider.value);
+        construction = parseInt(constructionSlider.value); // new
         transport = parseInt(transportSlider.value);
         filters = parseInt(filtersSlider.value);
         education = parseInt(educationSlider.value);
-        totalUsed = drilling + transport + filters + education;
+        totalUsed = drilling + construction + transport + filters + education;
     }
 
     // Update the value displays next to each slider
     drillingValue.textContent = drilling;
+    constructionValue.textContent = construction; // new
     transportValue.textContent = transport;
     filtersValue.textContent = filters;
     educationValue.textContent = education;
@@ -73,6 +78,9 @@ function updatePoints(changedSlider) {
 
 drillingSlider.addEventListener('input', function() {
     updatePoints(drillingSlider);
+});
+constructionSlider.addEventListener('input', function() { // new
+    updatePoints(constructionSlider);
 });
 transportSlider.addEventListener('input', function() {
     updatePoints(transportSlider);
@@ -225,6 +233,7 @@ submitBtn.addEventListener('click', function() {
 replayBtn.addEventListener('click', function() {
     // Reset all sliders to 0
     drillingSlider.value = 0;
+    constructionSlider.value = 0; // new
     transportSlider.value = 0;
     filtersSlider.value = 0;
     educationSlider.value = 0;
@@ -246,6 +255,7 @@ nextBtn.addEventListener('click', function() {
         resultOverlay.style.display = "none";
         // Reset sliders for new level
         drillingSlider.value = 0;
+        constructionSlider.value = 0; // new
         transportSlider.value = 0;
         filtersSlider.value = 0;
         educationSlider.value = 0;
