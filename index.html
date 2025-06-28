@@ -22,26 +22,80 @@
     -->
 
     <!-- Start Menu Overlay -->
-    <div id="start-menu" style="position:fixed; top:0; left:0; width:100vw; height:100vh; background:#FFF8E7; z-index:500; display:flex; flex-direction:column; align-items:center; justify-content:flex-start;">
+    <div id="start-menu"
+        style="
+        position:fixed;
+        top:0; left:0;
+        width:100vw; height:100vh;
+        background: radial-gradient(circle at 50% 50%, #FFFBE7 70%, #FFE066 100%);
+        z-index:500;
+        display:flex;
+        flex-direction:column;
+        align-items:center;
+        justify-content:flex-start;
+        box-shadow: 0 0 80px 0 #FFC90733 inset;
+    ">
         <h1 id="menu-title"
             style="
-            font-size:5em;
+            font-size:5.5em;
             color:#2E9DF7;
-            margin-top:180px;
-            margin-bottom: 40px;
-            text-shadow: -8px 8px 0 #FFC907;
+            margin-top:120px;
+            margin-bottom: 32px;
+            text-shadow: -10px 10px 0 #FFC907, 2px 2px 12px #2E9DF755;
             font-weight: bold;
             transform: rotate(-8deg);
-            ">
+            letter-spacing: 2px;
+            filter: drop-shadow(0 8px 16px #FFC90755);
+            transition: transform 0.3s;
+        "
+        onmouseover="this.style.transform='rotate(-4deg) scale(1.04)'"
+        onmouseout="this.style.transform='rotate(-8deg)'"
+        >
             Distirbute the Water!
         </h1>
-        <div style="display: flex; flex-direction: column; align-items: center; margin-top: 120px;">
-            <button id="start-btn" class="themed-btn" style="font-size:2em; width:220px; margin-bottom: 32px;">Start</button>
-            <button id="tutorial-btn" class="themed-btn" style="font-size:2em; width:220px;">Tutorial</button>
-            <!-- New: Collaborated with and logo -->
-            <div style="margin-top: 80px; text-align: center;">
-                <div style="font-size: 1.2em; color: #222; margin-bottom: 10px;">Made in collaboration with</div>
-                <img src="img/cw_logo_horizontal.png" alt="Charity: Water Logo" style="max-width: 400px; width: 98%; height: auto;">
+        <div style="display: flex; flex-direction: column; align-items: center; margin-top: 90px;">
+            <button id="start-btn" class="themed-btn"
+                style="
+                font-size:2.2em;
+                width:240px;
+                margin-bottom: 28px;
+                background: #2E9DF7;
+                color: #fff;
+                border: none;
+                box-shadow: 0 4px 16px #2E9DF755;
+                font-family: inherit;
+                font-weight: bold;
+                letter-spacing: 1px;
+                transition: background 0.2s, transform 0.2s;
+            "
+            onmouseover="this.style.background='#FFC907';this.style.color='#14213D';this.style.transform='scale(1.05)'"
+            onmouseout="this.style.background='#2E9DF7';this.style.color='#fff';this.style.transform='scale(1)'"
+            >Start</button>
+            <button id="tutorial-btn" class="themed-btn"
+                style="
+                font-size:2.2em;
+                width:240px;
+                background: #FFC907;
+                color: #14213D;
+                border: none;
+                font-family: inherit;
+                font-weight: bold;
+                letter-spacing: 1px;
+                box-shadow: 0 4px 16px #FFC90755;
+                transition: background 0.2s, color 0.2s, transform 0.2s;
+            "
+            onmouseover="this.style.background='#2E9DF7';this.style.color='#fff';this.style.transform='scale(1.05)'"
+            onmouseout="this.style.background='#FFC907';this.style.color='#14213D';this.style.transform='scale(1)'"
+            >Tutorial</button>
+            <!-- Collaborated with and logo -->
+            <div style="margin-top: 90px; text-align: center;">
+                <div style="font-size: 1.3em; color: #222; margin-bottom: 12px; font-family: Avenir, Arial, sans-serif; letter-spacing: 1px;">
+                    Made in collaboration with
+                </div>
+                <img src="img/cw_logo_horizontal.png"
+                    alt="Charity: Water Logo"
+                    style="max-width: 440px; width: 98%; height: auto; filter: drop-shadow(0 4px 16px #FFC90788); border-radius: 12px; background: #fffbe7; padding: 8px 18px;"
+                >
             </div>
         </div>
     </div>
