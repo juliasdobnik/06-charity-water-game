@@ -101,14 +101,22 @@ const scenarios = [
     "Arctic hamlet losing traditional water sources due to melting permafrost"
 ];
 
-// Start at level 1 (index 0)
-let currentLevel = 0;
+let currentLevel = 0; // Start at level 0 (Level 1 for user)
 
-// Get the scenario div from the page
+// Get the scenario and level indicator divs
 const scenarioDiv = document.getElementById("scenario");
+const levelIndicator = document.getElementById("level-indicator");
 
-// Show the scenario for the current level
-scenarioDiv.textContent = `Level ${currentLevel + 1}: ${scenarios[currentLevel]}`;
+// Function to update the scenario and level indicator
+function updateScenario() {
+    // Show the level number (add 1 because array is 0-based)
+    levelIndicator.textContent = `Level ${currentLevel + 1}`;
+    // Show the scenario for the current level
+    scenarioDiv.textContent = scenarios[currentLevel];
+}
+
+// Show the scenario and level when the website loads
+updateScenario();
 
 // Function to pick a random scenario and show it on the page
 function showRandomScenario() {
@@ -224,18 +232,28 @@ replayBtn.addEventListener('click', function() {
     updatePoints(drillingSlider);
     // Hide the overlay
     resultOverlay.style.display = 'none';
-    // Show a new random scenario
-    showRandomScenario();
+    // Keep the same scenario and level
+    updateScenario();
 });
 
 // When the player clicks Go to Next Level
 nextBtn.addEventListener('click', function() {
-    // For now, just reset like replay, but you could add more levels
-    drillingSlider.value = 0;
-    transportSlider.value = 0;
-    filtersSlider.value = 0;
-    educationSlider.value = 0;
-    updatePoints(drillingSlider);
-    resultOverlay.style.display = 'none';
-    showRandomScenario();
+    // Move to the next level if there is one
+    if (currentLevel < scenarios.length - 1) {
+        currentLevel++;
+        updateScenario();
+        // Hide the overlay and reset any other game state as needed
+        resultOverlay.style.display = "none";
+        // Reset sliders for new level
+        drillingSlider.value = 0;
+        transportSlider.value = 0;
+        filtersSlider.value = 0;
+        educationSlider.value = 0;
+        updatePoints(drillingSlider);
+    } else {
+        // If no more levels, show a message or restart
+        scenarioDiv.textContent = "Congratulations! You finished all levels!";
+        levelIndicator.textContent = "";
+        resultOverlay.style.display = "none";
+    }
 });
