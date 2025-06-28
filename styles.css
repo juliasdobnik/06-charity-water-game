@@ -171,6 +171,23 @@ span[id$="-value"] {
     will-change: transform, opacity;
 }
 
+/* Themed button styles for replay and next level */
+.themed-btn {
+    background-color: #2E9DF7; /* matches the blue in your headings */
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 22px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.2s;
+    box-shadow: 0 2px 8px rgba(46,157,247,0.10);
+}
+
+.themed-btn:hover {
+    background-color: #1766a6; /* darker blue on hover */
+}
+
 @media (max-width: 700px) {
     body {
         margin-left: 12px;

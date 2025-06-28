@@ -87,19 +87,28 @@ educationSlider.addEventListener('input', function() {
 // Initialize the display when the page loads
 updatePoints(drillingSlider);
 
-// List of possible scenarios for different villages (no hints about solutions)
+// Array of scenario descriptions, one for each level
 const scenarios = [
-    "A remote village with contaminated water sources.",
-    "A community where children often miss school due to water collection duties.",
-    "A village that experiences frequent water shortages during the dry season.",
-    "A town where waterborne diseases are common.",
-    "A rural area with no nearby clean water wells.",
-    "A village where families walk long distances to fetch water.",
-    "A community struggling with dirty and unsafe drinking water.",
-    "A village affected by seasonal flooding that pollutes water supplies.",
-    "A settlement where most homes lack access to safe water.",
-    "A village where people rely on river water that is not clean."
+    "Desert village with salty, drying wells and shrinking underground water",
+    "Appalachian town where old pipes contaminate tap water with lead",
+    "Mountain village relying on fog nets, but droughts leave them with nothing",
+    "Monsoon village facing floods in one season, dry wells the next",
+    "Lakeside village using polluted water shared with animals",
+    "Northern village where glacier-fed springs are flooding or drying unpredictably",
+    "Jungle village with streams poisoned by nearby gold mining",
+    "Steppe village depending on a failing, sand-filled irrigation canal",
+    "Island village where hurricanes ruin stored rainwater supplies",
+    "Arctic hamlet losing traditional water sources due to melting permafrost"
 ];
+
+// Start at level 1 (index 0)
+let currentLevel = 0;
+
+// Get the scenario div from the page
+const scenarioDiv = document.getElementById("scenario");
+
+// Show the scenario for the current level
+scenarioDiv.textContent = `Level ${currentLevel + 1}: ${scenarios[currentLevel]}`;
 
 // Function to pick a random scenario and show it on the page
 function showRandomScenario() {
