@@ -116,8 +116,66 @@ label {
 input[type="range"] {
     width: 100%;
     margin: 12px 0 8px 0;
-    accent-color: #FFC907; /* Charity: Water Yellow */
-    height: 4px;
+    accent-color: #2E9DF7; /* Blue thumb and track for most browsers */
+    height: 6px;
+    background: linear-gradient(to right, #2E9DF7 0%, #FFC907 100%);
+    border-radius: 6px;
+    outline: none;
+    box-shadow: 0 2px 8px #2E9DF733;
+    transition: background 0.3s;
+}
+
+/* Style the slider thumb for Webkit browsers (Chrome, Safari, Edge) */
+input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    background: #FFC907;
+    border: 3px solid #2E9DF7;
+    box-shadow: 0 2px 8px #2E9DF755;
+    cursor: pointer;
+    transition: background 0.2s, border 0.2s;
+}
+input[type="range"]:hover::-webkit-slider-thumb {
+    background: #2E9DF7;
+    border: 3px solid #FFC907;
+}
+
+/* Style the slider thumb for Firefox */
+input[type="range"]::-moz-range-thumb {
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    background: #FFC907;
+    border: 3px solid #2E9DF7;
+    box-shadow: 0 2px 8px #2E9DF755;
+    cursor: pointer;
+    transition: background 0.2s, border 0.2s;
+}
+input[type="range"]:hover::-moz-range-thumb {
+    background: #2E9DF7;
+    border: 3px solid #FFC907;
+}
+
+/* Track for Firefox */
+input[type="range"]::-moz-range-track {
+    height: 6px;
+    background: linear-gradient(to right, #2E9DF7 0%, #FFC907 100%);
+    border-radius: 6px;
+}
+
+/* Remove outline on focus for Firefox */
+input[type="range"]:focus {
+    outline: none;
+}
+
+/* Hide the outline for Edge/IE */
+input[type="range"]::-ms-fill-lower,
+input[type="range"]::-ms-fill-upper {
+    background: linear-gradient(to right, #2E9DF7 0%, #FFC907 100%);
+    border-radius: 6px;
 }
 
 span[id$="-value"] {

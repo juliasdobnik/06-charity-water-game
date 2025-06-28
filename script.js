@@ -261,9 +261,8 @@ nextBtn.addEventListener('click', function() {
         educationSlider.value = 0;
         updatePoints(drillingSlider);
     } else {
-        // If no more levels, show a message or restart
-        scenarioDiv.textContent = "Congratulations! You finished all levels!";
-        levelIndicator.textContent = "";
+        // If no more levels, show only the congratulations overlay
+        document.getElementById('congrats-overlay').style.display = "flex";
         resultOverlay.style.display = "none";
     }
 });
@@ -360,6 +359,47 @@ document.addEventListener('DOMContentLoaded', function() {
     submitBtn.addEventListener('mouseleave', function() {
         submitNote.style.display = 'none';
     });
+
+    const congratsOverlay = document.getElementById('congrats-overlay');
+    const resetBtn = document.getElementById('reset-btn');
+    const menuBtn = document.getElementById('menu-btn');
+
+    // Reset button: restart the game from level 1
+    resetBtn.addEventListener('click', function() {
+        congratsOverlay.style.display = 'none';
+        currentLevel = 0;
+        updateScenario();
+        // Reset sliders
+        drillingSlider.value = 0;
+        constructionSlider.value = 0;
+        transportSlider.value = 0;
+        filtersSlider.value = 0;
+        educationSlider.value = 0;
+        updatePoints(drillingSlider);
+    });
+
+    // Menu button: show the start menu and hide the game UI
+    menuBtn.addEventListener('click', function() {
+        congratsOverlay.style.display = 'none';
+        document.getElementById('start-menu').style.display = 'flex';
+        document.getElementById('menu-title').style.display = '';
+        // Hide the game UI
+        document.querySelector('h1:not(#menu-title)').style.display = 'none';
+        document.querySelector('.instructions').style.display = 'none';
+        document.getElementById('level-indicator').style.display = 'none';
+        document.getElementById('scenario').style.display = 'none';
+        document.getElementById('points-available').style.display = 'none';
+        document.getElementById('sliders-section').style.display = 'none';
+        document.getElementById('submit-btn').style.display = 'none';
+    });
+
+    // Hide the result overlay if the player finished all levels
+    const resultOverlay = document.getElementById('result-overlay');
+    if (congratsOverlay && resultOverlay) {
+        congratsOverlay.addEventListener('show', function() {
+            resultOverlay.style.display = 'none';
+        });
+    }
 });
 
 // Show tutorial overlay or section when the page loads
