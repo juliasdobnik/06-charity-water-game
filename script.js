@@ -346,6 +346,20 @@ document.addEventListener('DOMContentLoaded', function() {
             document.getElementById('submit-btn').style.display = 'none';
         }
     });
+
+    const submitBtn = document.getElementById('submit-btn');
+    const submitNote = document.getElementById('submit-note');
+
+    submitBtn.addEventListener('mouseenter', function() {
+        // Only show the note if the button is disabled
+        if (submitBtn.disabled) {
+            submitNote.style.display = 'block';
+        }
+    });
+
+    submitBtn.addEventListener('mouseleave', function() {
+        submitNote.style.display = 'none';
+    });
 });
 
 // Show tutorial overlay or section when the page loads

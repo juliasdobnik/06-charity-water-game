@@ -6,7 +6,12 @@
     <title>Charity Water Game</title>
     <link rel="stylesheet" href="styles.css">
 </head>
-<body>
+<body
+    style="
+        /* Softer blue gradient just on the sides */
+        background: linear-gradient(to right, #E3F2FD 0%, #FFFBE7 15%, #FFFBE7 85%, #E3F2FD 100%);
+    "
+>
     <!-- 
     Scenario Descriptions for Each Level:
     1. Desert village with salty, drying wells and shrinking underground water
@@ -151,8 +156,12 @@
             </div>
         </div>
     </div>
-    <div style="text-align: center; margin-top: 30px;">
+    <div style="text-align: center; margin-top: 30px; position: relative;">
         <button id="submit-btn" disabled>Submit Plan</button>
+        <!-- Note for submit button, hidden by default -->
+        <div id="submit-note" style="display:none; position:absolute; left:50%; top:110%; transform:translateX(-50%); background:#fffbe7; color:#2E9DF7; border-radius:8px; padding:8px 18px; font-size:1.1em; box-shadow:0 2px 8px #FFC90733; margin-top:6px; z-index:10;">
+            Distribute all points first!
+        </div>
     </div>
     <div id="result-overlay" style="display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(20,33,61,0.85); z-index: 100; justify-content: center; align-items: center; flex-direction: column;">
         <div style="background: #fff; border-radius: 16px; padding: 36px 28px; text-align: center; min-width: 300px; box-shadow: 0 4px 24px rgba(0,0,0,0.18);">
