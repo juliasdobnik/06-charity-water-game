@@ -304,34 +304,182 @@ document.addEventListener('DOMContentLoaded', function() {
         showGameUI();
     });
 
-    // Tutorial logic
+    // Tutorial steps with target selectors and position info
     const tutorialSteps = [
-        "Welcome to the Charity Water Game!<br><br>You'll learn how to help a village get clean water.",
-        "At the top, you'll see instructions for each round.",
-        "Below, you'll see a yellow box. This is the <b>scenario</b> describing the village's water problem for this level.",
-        "You have <b>100 points</b> to distribute using the sliders.",
-        "<b>Drilling</b>: Finding and accessing water underground.",
-        "<b>Construction</b>: Building related infrastructure (wells, tanks, pipes, latrines).",
-        "<b>Transport</b>: Moving water or materials across terrain.",
-        "<b>Filters</b>: Making water safe to drink.",
-        "<b>Education</b>: Teaching hygiene, maintenance, and conservation.",
-        "Try to use all your points wisely! When you're ready, click Start to play."
+        {
+            text: "Welcome to the Charity Water Game!<br><br>You'll learn how to help a village get clean water.",
+            target: null
+        },
+        {
+            text: "At the top, you'll see instructions for each round.",
+            target: '.instructions'
+        },
+        {
+            text: "Below, you'll see a yellow box. This is the <b>scenario</b> describing the village's water problem for this level.",
+            target: '#scenario'
+        },
+        {
+            text: "You have <b>100 points</b> to distribute using the sliders.",
+            target: '#points-available'
+        },
+        {
+            text: "<b>Drilling</b>: Finding and accessing water underground.",
+            target: '#drilling-slider'
+        },
+        {
+            text: "<b>Construction</b>: Building related infrastructure (wells, tanks, pipes, latrines).",
+            target: '#construction-slider'
+        },
+        {
+            text: "<b>Transport</b>: Moving water or materials across terrain.",
+            target: '#transport-slider'
+        },
+        {
+            text: "<b>Filters</b>: Making water safe to drink.",
+            target: '#filters-slider'
+        },
+        {
+            text: "<b>Education</b>: Teaching hygiene, maintenance, and conservation.",
+            target: '#education-slider'
+        },
+        {
+            text: "Try to use all your points wisely! When you're ready, click Start to play.",
+            target: '#submit-btn'
+        }
     ];
     let tutorialIndex = 0;
 
+    // Helper function to position the tutorial box near a target element
+    function positionTutorialBox(targetSelector) {
+        const tutorialBox = document.getElementById('tutorial-box');
+        // Reset to default
+        tutorialBox.style.position = '';
+        tutorialBox.style.left = '';
+        tutorialBox.style.top = '';
+        tutorialBox.style.transform = '';
+        tutorialBox.style.margin = '80px auto 0 auto';
+        tutorialBox.style.maxWidth = '480px';
+        tutorialBox.style.width = '';
+        tutorialBox.style.background = '#fff';
+
+        // Remove highlight from all previously highlighted elements
+        document.querySelectorAll('.tutorial-highlight').forEach(function(el) {
+            el.classList.remove('tutorial-highlight');
+        });
+
+        // Remove highlight from all slider labels
+        document.querySelectorAll('.slider-container label').forEach(function(label) {
+            label.classList.remove('tutorial-highlight');
+        });
+
+        if (!targetSelector) {
+            // Centered for the first step
+            tutorialBox.style.position = '';
+            tutorialBox.style.margin = '80px auto 0 auto';
+            tutorialBox.style.left = '';
+            tutorialBox.style.top = '';
+            tutorialBox.style.transform = '';
+            return;
+        }
+
+        // Try to find the target element
+        const target = document.querySelector(targetSelector);
+        if (target) {
+            // Highlight the target element
+            target.classList.add('tutorial-highlight');
+
+            // If the target is a slider, also highlight its label
+            if (
+                targetSelector === '#drilling-slider' ||
+                targetSelector === '#construction-slider' ||
+                targetSelector === '#transport-slider' ||
+                targetSelector === '#filters-slider' ||
+                targetSelector === '#education-slider'
+            ) {
+                // Find the label for this slider in the same container
+                const container = target.closest('.slider-container');
+                if (container) {
+                    const label = container.querySelector('label');
+                    if (label) {
+                        label.classList.add('tutorial-highlight');
+                    }
+                }
+            }
+
+            // Get the position of the target
+            const rect = target.getBoundingClientRect();
+            tutorialBox.style.position = 'fixed';
+            tutorialBox.style.background = '#fffbe7';
+            tutorialBox.style.maxWidth = '340px';
+            tutorialBox.style.width = 'auto';
+            tutorialBox.style.margin = '0';
+
+            // Place the tutorial box near the target (to the right or below)
+            let boxLeft = rect.right + 24;
+            let boxTop = rect.top;
+
+            // If not enough space on the right, place below
+            if (boxLeft + 340 > window.innerWidth) {
+                boxLeft = rect.left;
+                boxTop = rect.bottom + 18;
+            }
+            // If not enough space below, place above
+            if (boxTop + 180 > window.innerHeight) {
+                boxTop = rect.top - 160;
+            }
+
+            tutorialBox.style.left = boxLeft + 'px';
+            tutorialBox.style.top = boxTop + 'px';
+            tutorialBox.style.transform = 'translateX(0)';
+        }
+    }
+
+    // Add a simple highlight style for tutorial
+    const style = document.createElement('style');
+    style.innerHTML = `
+        .tutorial-highlight {
+            box-shadow: 0 0 0 4px #2E9DF7AA, 0 0 16px 8px #FFC90766 !important;
+            z-index: 700 !important;
+            position: relative !important;
+            border-radius: 10px !important;
+            transition: box-shadow 0.2s;
+        }
+    `;
+    document.head.appendChild(style);
+
+    // Show the game UI when tutorial starts, and overlay the tutorial
     document.getElementById('tutorial-btn').addEventListener('click', function() {
         hideMenu();
+        // Show the game UI so the tutorial overlays it
+        document.querySelector('h1:not(#menu-title)').style.display = '';
+        document.querySelector('.instructions').style.display = '';
+        document.getElementById('level-indicator').style.display = '';
+        document.getElementById('scenario').style.display = '';
+        document.getElementById('points-available').style.display = '';
+        document.getElementById('sliders-section').style.display = '';
+        document.getElementById('submit-btn').style.display = '';
         document.getElementById('tutorial-overlay').style.display = 'flex';
         tutorialIndex = 0;
-        document.getElementById('tutorial-box').innerHTML = tutorialSteps[tutorialIndex];
+        document.getElementById('tutorial-box').innerHTML = tutorialSteps[tutorialIndex].text;
+        positionTutorialBox(tutorialSteps[tutorialIndex].target);
     });
 
     document.getElementById('tutorial-overlay').addEventListener('click', function() {
+        // Remove highlight from all elements
+        document.querySelectorAll('.tutorial-highlight').forEach(function(el) {
+            el.classList.remove('tutorial-highlight');
+        });
+
         tutorialIndex++;
         if (tutorialIndex < tutorialSteps.length) {
-            document.getElementById('tutorial-box').innerHTML = tutorialSteps[tutorialIndex];
+            document.getElementById('tutorial-box').innerHTML = tutorialSteps[tutorialIndex].text;
+            positionTutorialBox(tutorialSteps[tutorialIndex].target);
         } else {
             document.getElementById('tutorial-overlay').style.display = 'none';
+            // Remove any highlight
+            document.querySelectorAll('.tutorial-highlight').forEach(function(el) {
+                el.classList.remove('tutorial-highlight');
+            });
             // Show the start menu again after tutorial finishes
             document.getElementById('start-menu').style.display = 'flex';
             document.getElementById('menu-title').style.display = '';
