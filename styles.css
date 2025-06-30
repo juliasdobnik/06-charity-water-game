@@ -259,6 +259,38 @@ span[id$="-value"] {
     background-color: #1766a6; /* darker blue on hover */
 }
 
+/* Water droplet animation */
+.water-droplet {
+    position: fixed;
+    top: -40px;
+    width: 18px;
+    height: 28px;
+    background: #2E9DF7;
+    border-radius: 50% 50% 60% 60% / 60% 60% 100% 100%;
+    opacity: 0.85;
+    z-index: 350;
+    pointer-events: none;
+    box-shadow: 0 2px 8px #2E9DF755;
+    left: 0;
+    animation: none;
+}
+
+/* Updated animation so droplets disappear at the bottom and do not jump up again */
+@keyframes fall-droplet {
+    0% {
+        opacity: 0.9;
+        transform: scaleY(1) translateY(0);
+    }
+    80% {
+        opacity: 1;
+        transform: scaleY(1.1) translateY(80vh);
+    }
+    100% {
+        opacity: 0;
+        transform: scaleY(1.1) translateY(100vh);
+    }
+}
+
 @media (max-width: 700px) {
     body {
         margin-left: 12px;

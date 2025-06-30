@@ -119,8 +119,8 @@ const levelIndicator = document.getElementById("level-indicator");
 function updateScenario() {
     // Show the level number (add 1 because array is 0-based)
     levelIndicator.textContent = `Level ${currentLevel + 1}`;
-    // Show the scenario for the current level
-    scenarioDiv.textContent = scenarios[currentLevel];
+    // Show the scenario for the current level, always with "Scenario:" in front
+    scenarioDiv.textContent = `Scenario: ${scenarios[currentLevel]}`;
 }
 
 // Show the scenario and level when the website loads
@@ -132,7 +132,7 @@ function showRandomScenario() {
     const randomIndex = Math.floor(Math.random() * scenarios.length);
     // Get the scenario text
     const scenarioText = scenarios[randomIndex];
-    // Find the scenario div and set its text
+    // Find the scenario div and set its text, always with "Scenario:" in front
     const scenarioDiv = document.getElementById('scenario');
     scenarioDiv.innerHTML = `<strong>Scenario:</strong> ${scenarioText}`;
 }
@@ -194,6 +194,33 @@ function showFireworks() {
     }
 }
 
+// Function to show simple water droplets falling from the top
+function showWaterDroplets() {
+    // Get the container for fireworks (reuse for droplets)
+    const container = document.getElementById('fireworks-container');
+    // Number of droplets
+    const dropletCount = 18;
+    for (let i = 0; i < dropletCount; i++) {
+        // Create a div for each droplet
+        const droplet = document.createElement('div');
+        droplet.className = 'water-droplet';
+        // Random horizontal position
+        const left = Math.random() * 95; // percent
+        droplet.style.left = `${left}vw`;
+        droplet.style.top = `-40px`;
+        // Random delay and duration
+        const delay = Math.random() * 0.7;
+        const duration = 1.1 + Math.random() * 0.7;
+        droplet.style.animation = `fall-droplet ${duration}s ${delay}s linear forwards`;
+        // Add to the container
+        container.appendChild(droplet);
+        // Remove after animation
+        setTimeout(() => {
+            droplet.remove();
+        }, (delay + duration) * 1000 + 100);
+    }
+}
+
 // When the player clicks Submit Plan
 submitBtn.addEventListener('click', function() {
     // For now, randomly decide if the plan is correct or not
@@ -202,6 +229,7 @@ submitBtn.addEventListener('click', function() {
     if (isCorrect) {
         resultMessage.textContent = "Great job! You distributed the water correctly!";
         showFireworks(); // Show fireworks if correct
+        showWaterDroplets(); // Show water droplets if correct
         // Remove any previous hint
         if (document.getElementById('hint-message')) {
             document.getElementById('hint-message').remove();
