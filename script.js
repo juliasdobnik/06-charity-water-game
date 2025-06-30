@@ -278,7 +278,9 @@ nextBtn.addEventListener('click', function() {
     // Move to the next level if there is one
     if (currentLevel < scenarios.length - 1) {
         currentLevel++;
+        levelsPassed++; // Increase water only after passing a level
         updateScenario();
+        updateRisingWater();
         // Hide the overlay and reset any other game state as needed
         resultOverlay.style.display = "none";
         // Reset sliders for new level
@@ -289,11 +291,56 @@ nextBtn.addEventListener('click', function() {
         educationSlider.value = 0;
         updatePoints(drillingSlider);
     } else {
-        // If no more levels, show only the congratulations overlay
+        // Last level passed, fill water
+        levelsPassed = 10;
         document.getElementById('congrats-overlay').style.display = "flex";
         resultOverlay.style.display = "none";
+        updateRisingWater();
     }
 });
+
+// Track how many levels the player has passed (not just currentLevel)
+let levelsPassed = 0;
+
+// Function to update the rising water background based on levels passed
+function updateRisingWater() {
+    const waterBg = document.getElementById('rising-water-bg');
+    // No water at the start (before any level is passed)
+    if (levelsPassed === 0) {
+        waterBg.style.height = '0';
+    } else {
+        // Water rises as levels are passed (max 10)
+        let percent = (levelsPassed / 10) * 100;
+        if (percent > 100) percent = 100;
+        waterBg.style.height = `${percent}vh`;
+    }
+
+    // Change level indicator color if water reaches it
+    const levelIndicator = document.getElementById('level-indicator');
+    // Get the top position of the level indicator
+    const rect = levelIndicator.getBoundingClientRect();
+    // Get the window height
+    const winHeight = window.innerHeight;
+    // Calculate how much of the screen is covered by water
+    const waterTop = winHeight - (winHeight * ((levelsPassed / 10)));
+    // If the water covers the level indicator, change its color to yellow
+    if (rect.bottom > waterTop && levelsPassed > 0) {
+        levelIndicator.style.color = '#FFC907'; // yellow
+    } else {
+        levelIndicator.style.color = '#2E9DF7'; // blue
+    }
+
+    // Change Submit Plan button color if water reaches it
+    const submitBtn = document.getElementById('submit-btn');
+    const submitRect = submitBtn.getBoundingClientRect();
+    if (submitRect.bottom > waterTop && levelsPassed > 0) {
+        submitBtn.style.background = '#FFC907';
+        submitBtn.style.color = '#14213D';
+    } else {
+        submitBtn.style.background = '#2E9DF7';
+        submitBtn.style.color = '#fff';
+    }
+}
 
 // Wait until the DOM is fully loaded before running menu logic
 document.addEventListener('DOMContentLoaded', function() {
@@ -545,6 +592,7 @@ document.addEventListener('DOMContentLoaded', function() {
         congratsOverlay.style.display = 'none';
         currentLevel = 0;
         updateScenario();
+        updateRisingWater(); // Reset water level
         // Reset sliders
         drillingSlider.value = 0;
         constructionSlider.value = 0;
@@ -552,6 +600,8 @@ document.addEventListener('DOMContentLoaded', function() {
         filtersSlider.value = 0;
         educationSlider.value = 0;
         updatePoints(drillingSlider);
+        levelsPassed = 0;
+        updateRisingWater();
     });
 
     // Menu button: show the start menu and hide the game UI
@@ -576,6 +626,9 @@ document.addEventListener('DOMContentLoaded', function() {
             resultOverlay.style.display = 'none';
         });
     }
+
+    levelsPassed = 0;
+    updateRisingWater();
 });
 
 // Show tutorial overlay or section when the page loads

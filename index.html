@@ -134,7 +134,9 @@
     <h1>Distirbute the Water!</h1>
     <h2 class="instructions">Allocate points to different project elements for providing water to the village.</h2>
     <!-- Level Indicator -->
-    <div id="level-indicator" style="margin-bottom: 16px; text-align: center; font-size: 1.5em; font-weight: bold; color: #2E9DF7;"></div>
+    <div id="level-indicator"
+        style="margin-bottom: 16px; text-align: center; font-size: 1.5em; font-weight: bold; color: #2E9DF7; -webkit-text-stroke: 1.5px #111; text-stroke: 1.5px #111;">
+    </div>
     <!-- Scenario Section -->
     <div id="scenario" style="margin-bottom: 20px;"></div>
     <!-- Points Available Display (now centered under scenario) -->
@@ -224,5 +226,17 @@
         }
     });
     </script>
+    <!-- Place the rising water background as the very first child of <body> so it is always behind everything -->
+    <div id="rising-water-bg" style="
+        position: fixed;
+        left: 0;
+        bottom: 0;
+        width: 100vw;
+        height: 0;
+        background: linear-gradient(to top, #2E9DF7 80%, #8BD1CB 100%);
+        z-index: -1;
+        transition: height 1.2s cubic-bezier(.4,1.6,.4,1);
+        pointer-events: none;
+    "></div>
 </body>
 </html>
